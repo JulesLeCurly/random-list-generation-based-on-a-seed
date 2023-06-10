@@ -1,6 +1,9 @@
-# V4 List Creation Module
+# V5 List Creation Module
 
-This project provides a module for creating a list using the V4 algorithm.
+The aim of the project is to create a list of random numbers based on a seed!
+
+This project provides a module for creating this list of random numbers using the present function V5.
+
 
 ## Installation
 
@@ -16,14 +19,14 @@ pip install hashlib tqdm
 from list_generate import v5
 
 # Instantiate the v5 class
-v4 = v5()
+v5 = v5()
 
-# Generate a list using the V4 algorithm
+# Generate a list using the V5 algorithm
 seed = 1234
 Fin = 10
 MIN = 1
 MAX = 100
-result = v4.generate(seed, Fin, MIN, MAX, show=True)
+result = v5.generate(seed, Fin, MIN, MAX, show=True)
 print(result)
 ```
 
@@ -40,7 +43,7 @@ Returns:
 
 ### `calculate_large_number(seed)`
 
-This method calculates a large number using the V4 algorithm.
+This method calculates a large number using the v5 algorithm.
 
 - `seed` (int): The seed value to start the calculation.
 
