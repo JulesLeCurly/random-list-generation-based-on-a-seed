@@ -1,57 +1,42 @@
+#V4 module de création de liste
 import time
 
-
-class v3(object):
-	def arroud(self, nb):
-		if nb - int(nb) > 0.5:
-			nb = nb+1
-		return int(nb)
-	    
-	def nob(self, seed , toure):
-		nb = seed
-		t = 1
-		while nb < 10**700:
-			t += 1+toure*seed
-			nb = nb*t
-		return nb
-	
-	def chunk(self, seed, RAM, RAM2, MAX, MIN, vu, k):
-		#
-		pr = ('Encore ---- S')
-		debut = time.time()
-		#
-		seed = int(seed)
-		tim = 0
-		nb = str(self.nob(seed, 1))
-		t = 0
-		toure = RAM2
-		chunk = {}
-		difference = MAX - MIN
-		if MAX < MIN or difference > 10**20:
-			print('Error')
-		else:
-			while toure != RAM:
-				toure += 1
-				t += k
-				if t > 500:
-					t = 0
-					nb = str(self.nob(seed, toure))
-				tt = fin = 0
-				while tt != k:
-					fin += int(nb[t + tt])*(10**tt)
-					tt += 1
-				fin = (fin*difference)/10**k
-				chunk[toure] = self.arroud(fin) + MIN
-				####
-				if vu == 1:
-					if toure == int(toure/(RAM/100))*RAM/100:
-						print(' ',int(toure/(RAM/100)),'%')
-				elif vu == 2:
-					if toure == int(toure/(RAM/100))*RAM/100:
-						print(str(int(toure/(RAM/100)) ) + '%	' + pr)
-						pr = 'Encore ' + str(int((time.time() - debut)*(100 - int(toure/(RAM/100)))*100)/100) + 'S'
-						pr = str(pr)
-						debut = time.time()
-				####
-			return chunk
-			
+class v4(object):
+    def round_number(num):
+        if num - int(num) > 0.5:
+            num += 1
+        return int(num)
+    
+    def calculate_large_number(seed, s):
+        current_number = seed
+        turns_count = 1
+        while current_number < 10 ** 1005:
+            turns_count += 1 + s * seed
+            current_number = current_number * turns_count
+        return current_number
+    
+    def generate(self, seed, Fin, MIN, MAX):
+        seed = int(seed)
+        liste = {}
+        turns_count = 0
+        difference = MAX - MIN
+        difference_in_leng = len(str(difference))
+        difference_in_leng_max = int('9'*difference_in_leng)
+        turns_count_large_number = 0
+        large_number = str(v4.calculate_large_number(seed, difference_in_leng))
+        while Fin != turns_count:
+            turns_count += 1
+            if turns_count_large_number > 1005:
+                large_number = str(v4.calculate_large_number(seed, turns_count))
+                turns_count_large_number = 0
+            
+            t = -1
+            temp = 0
+            while t+1 != difference_in_leng:
+                t += 1
+                turns_count_large_number += 1
+                temp += int(large_number[int(large_number[turns_count_large_number])+int(large_number[turns_count_large_number+1])+int(large_number[turns_count_large_number+2])])*(10**t)
+            
+            temp = (temp*difference)/difference_in_leng_max
+            liste[turns_count] = v4.round_number(temp) + MIN
+        return liste
